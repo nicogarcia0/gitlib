@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo 'https://github.com/nicogarcia0'
+
+if [ "$1" = "-l" ]
+then
+	echo 'Listando y filtrando repositorios de '$2
+	curl -s https://api.github.com/users/$2/repos | grep '"name": "*"'
+	echo 'Si no se muestra nada, es que ese usuario no existe o no tiene repositorios publicos'	
+elif [ "$1" = '-c' ]
+then
+	if [ "$2" = "-s" ]
+	then
+		echo 'Descargando repositorio' $4 'de' $3
+		git clone -q https://github.com/$3/$4
+	else
+		echo 'Descanrgando repositorio' $3 'de' $2
+		git clone https://github.com/$2/$3
+	fi	
+fi
+
